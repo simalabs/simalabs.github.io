@@ -215,11 +215,15 @@
         <div class="description">Mountain goat in natural habitat</div>
       </div>
       <div style="margin: 16px 0 12px; padding: 8px; background: #1a1a1a; border-radius: 6px; font-size: 12px; color: #888;">
-        <strong>Deep Codec Comparison</strong>
+        <strong>Deep vs. Standard Codec Comparison</strong>
       </div>
       <div class="video-option" data-video="deep_codec">
-        <div class="title">Deep vs Standard Codec</div>
-        <div class="description">Deep: 39.59 PSNR @ 216 kbps<br>Standard: 39.12 PSNR @ 605 kbps</div>
+        <div class="title">Bees</div>
+        <div class="description">Deep: 39.59 dB PSNR @ 216 kbps<br>Standard: 39.12 dB PSNR @ 605 kbps</div>
+      </div>
+      <div class="video-option" data-video="deep_codec_waves">
+        <div class="title">Waves</div>
+        <div class="description">Deep: 34.8 dB PSNR @ 1364 kbps<br>Standard: 33.9 dB PSNR @ 2836 kbps</div>
       </div>
     </div>
     <div class="wrap">
@@ -584,8 +588,18 @@
         name: 'Deep Codec Comparison',
         leftModel: 'Deep Codec',
         rightModel: 'Standard Codec',
-        leftMetrics: { psnr: '39.59', bitrate: '216 kbps' },
-        rightMetrics: { psnr: '39.12', bitrate: '605 kbps' },
+        leftMetrics: { psnr: '39.59 dB', bitrate: '216 kbps' },
+        rightMetrics: { psnr: '39.12 dB', bitrate: '605 kbps' },
+        category: 'codec'
+      },
+      'deep_codec_waves': {
+        right: videoBase + 'deep_codec/standard_codec_waves.mp4',
+        left: videoBase + 'deep_codec/deep_codec_waves.mp4',
+        name: 'Waves - Deep Codec Comparison',
+        leftModel: 'Deep Codec',
+        rightModel: 'Standard Codec',
+        leftMetrics: { psnr: '34.8 dB', bitrate: '1364 kbps' },
+        rightMetrics: { psnr: '33.9 dB', bitrate: '2836 kbps' },
         category: 'codec'
       }
     };
