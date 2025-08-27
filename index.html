@@ -106,6 +106,19 @@
     }
     .video-label.left { background: rgba(0,80,120,0.8); }
     .video-label.right { background: rgba(120,60,0,0.8); }
+    .codec-metrics {
+      position: absolute; bottom: 10px; left: 0; right: 0;
+      display: flex; justify-content: space-between; padding: 0 20px;
+      pointer-events: none; z-index: 10;
+    }
+    .codec-metric {
+      background: rgba(0,0,0,0.8); color: #fff; padding: 6px 12px;
+      border-radius: 6px; font-size: 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .codec-metric .value { font-weight: 600; color: #4ae; }
+    .codec-metric.left { background: rgba(0,80,120,0.8); }
+    .codec-metric.right { background: rgba(120,60,0,0.8); }
     .controls {
       display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 10px;
     }
@@ -201,6 +214,13 @@
         <div class="title">Goat</div>
         <div class="description">Mountain goat in natural habitat</div>
       </div>
+      <div style="margin: 16px 0 12px; padding: 8px; background: #1a1a1a; border-radius: 6px; font-size: 12px; color: #888;">
+        <strong>Deep Codec Comparison</strong>
+      </div>
+      <div class="video-option" data-video="deep_codec">
+        <div class="title">Deep vs Standard Codec</div>
+        <div class="description">Deep: 39.59 PSNR @ 216 kbps<br>Standard: 39.12 PSNR @ 605 kbps</div>
+      </div>
     </div>
     <div class="wrap">
     <h1>RealESRGAN vs SimaUpscaleQ — Video Quality Comparison</h1>
@@ -233,6 +253,10 @@
       <div class="video-labels" id="videoLabels" style="display:none;">
         <span class="video-label left" id="leftLabel">SimaUpscaleQ</span>
         <span class="video-label right" id="rightLabel">RealESRGAN</span>
+      </div>
+      <div class="codec-metrics" id="codecMetrics" style="display:none;">
+        <span class="codec-metric left" id="leftMetric"></span>
+        <span class="codec-metric right" id="rightMetric"></span>
       </div>
     </div>
 
@@ -553,6 +577,16 @@
         leftModel: 'SimaUpscaleF',
         rightModel: 'RealESRGAN',
         category: 'fidelity'
+      },
+      'deep_codec': {
+        right: videoBase + 'deep_codec/standard_codec.mp4',
+        left: videoBase + 'deep_codec/deep_codec.mp4',
+        name: 'Deep Codec Comparison',
+        leftModel: 'Deep Codec',
+        rightModel: 'Standard Codec',
+        leftMetrics: { psnr: '39.59', bitrate: '216 kbps' },
+        rightMetrics: { psnr: '39.12', bitrate: '605 kbps' },
+        category: 'codec'
       }
     };
 
@@ -567,16 +601,31 @@
       // Show/hide toggle buttons and labels based on category
       const togglesEl = document.getElementById('sourceToggles');
       const labelsEl = document.getElementById('videoLabels');
+      const metricsEl = document.getElementById('codecMetrics');
+      
       if (pair.category === 'fidelity') {
         togglesEl.style.display = '';
         labelsEl.style.display = 'none';
+        metricsEl.style.display = 'none';
         // Reset to default sources for fidelity videos
         currentSources.left = 'simaf';
         currentSources.right = 'resr';
         updateToggleButtons();
+      } else if (pair.category === 'codec') {
+        togglesEl.style.display = 'none';
+        labelsEl.style.display = '';
+        metricsEl.style.display = '';
+        // Update labels and metrics for codec videos
+        document.getElementById('leftLabel').textContent = pair.leftModel;
+        document.getElementById('rightLabel').textContent = pair.rightModel;
+        document.getElementById('leftMetric').innerHTML = 
+          `PSNR: <span class="value">${pair.leftMetrics.psnr}</span> | Bitrate: <span class="value">${pair.leftMetrics.bitrate}</span>`;
+        document.getElementById('rightMetric').innerHTML = 
+          `PSNR: <span class="value">${pair.rightMetrics.psnr}</span> | Bitrate: <span class="value">${pair.rightMetrics.bitrate}</span>`;
       } else {
         togglesEl.style.display = 'none';
         labelsEl.style.display = '';
+        metricsEl.style.display = 'none';
         // Update labels for quality videos
         document.getElementById('leftLabel').textContent = pair.leftModel;
         document.getElementById('rightLabel').textContent = pair.rightModel;
