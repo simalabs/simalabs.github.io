@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Local Video A/B Slider</title>
+  <title>SimaUpscaleF vs RealESRGAN - Video Quality Comparison</title>
   <style>
     :root { --split: 50%; }
     html, body { height: 100%; }
@@ -176,25 +176,7 @@
   <div class="container">
     <div class="sidebar">
       <h2>Select Video Pair</h2>
-      <div style="margin-bottom: 12px; padding: 8px; background: #1a1a1a; border-radius: 6px; font-size: 12px; color: #888;">
-        <strong>SimaUpscaleQ vs RealESRGAN</strong>
-      </div>
-      <div class="video-option active" data-video="koala_surfing">
-        <div class="title">Koala Surfing</div>
-        <div class="description">Koala on surfboard</div>
-      </div>
-      <div class="video-option" data-video="ocean_fire">
-        <div class="title">Ocean Fire Show</div>
-        <div class="description">Man spinning fire in front of ocean</div>
-      </div>
-      <div class="video-option" data-video="videoSRC21_07">
-        <div class="title">Car Crash</div>
-        <div class="description">High motion car crash sequence from SRC dataset</div>
-      </div>
-      <div style="margin: 16px 0 12px; padding: 8px; background: #1a1a1a; border-radius: 6px; font-size: 12px; color: #888;">
-        <strong>SimaUpscaleF vs RealESRGAN</strong>
-      </div>
-      <div class="video-option" data-video="snow_scene_veo3">
+      <div class="video-option active" data-video="snow_scene_veo3">
         <div class="title">Snow Scene</div>
         <div class="description">A furry creature walking through a winter scene</div>
       </div>
@@ -214,20 +196,9 @@
         <div class="title">Goat</div>
         <div class="description">Mountain goat in natural habitat</div>
       </div>
-      <div style="margin: 16px 0 12px; padding: 8px; background: #1a1a1a; border-radius: 6px; font-size: 12px; color: #888;">
-        <strong>Deep vs. Standard Codec Comparison</strong>
-      </div>
-      <div class="video-option" data-video="deep_codec">
-        <div class="title">Bees</div>
-        <div class="description">Deep: 39.59 dB PSNR @ 216 kbps<br>Standard: 39.12 dB PSNR @ 605 kbps</div>
-      </div>
-      <div class="video-option" data-video="deep_codec_waves">
-        <div class="title">Waves</div>
-        <div class="description">Deep: 34.8 dB PSNR @ 1364 kbps<br>Standard: 33.9 dB PSNR @ 2836 kbps</div>
-      </div>
     </div>
     <div class="wrap">
-    <h1>RealESRGAN vs SimaUpscaleQ — Video Quality Comparison</h1>
+    <h1>SimaUpscaleF vs RealESRGAN — Video Quality Comparison</h1>
 
     <div class="panel" style="display: none;">
       <label>Left (A)
@@ -503,30 +474,6 @@
 
     // Video selection logic
     const videoPairs = {
-      'koala_surfing': {
-        right: videoBase + 'videos/koala_surfing_resr.mp4',
-        left: videoBase + 'videos/koala_surfing_simaq.mp4',
-        name: 'Koala Surfing',
-        leftModel: 'SimaUpscaleQ',
-        rightModel: 'RealESRGAN',
-        category: 'quality'
-      },
-      'ocean_fire': {
-        right: videoBase + 'videos/ocean_fire_resr.mp4',
-        left: videoBase + 'videos/ocean_fire_simaq.mp4',
-        name: 'Ocean Fire',
-        leftModel: 'SimaUpscaleQ',
-        rightModel: 'RealESRGAN',
-        category: 'quality'
-      },
-      'videoSRC21_07': {
-        right: videoBase + 'videos/videoSRC21_07_resr.mp4',
-        left: videoBase + 'videos/videoSRC21_07_simaq.mp4',
-        name: 'Video SRC21_07',
-        leftModel: 'SimaUpscaleQ',
-        rightModel: 'RealESRGAN',
-        category: 'quality'
-      },
       'butterfly_mj': {
         simaf: videoBase + 'fidelity/butterfly_mj_simaf.mp4',
         resr: videoBase + 'fidelity/butterfly_mj_resr.mp4',
@@ -582,26 +529,6 @@
         rightModel: 'RealESRGAN',
         category: 'fidelity'
       },
-      'deep_codec': {
-        right: videoBase + 'deep_codec/standard_codec.mp4',
-        left: videoBase + 'deep_codec/deep_codec.mp4',
-        name: 'Deep Codec Comparison',
-        leftModel: 'Deep Codec',
-        rightModel: 'Standard Codec',
-        leftMetrics: { psnr: '39.59 dB', bitrate: '216 kbps' },
-        rightMetrics: { psnr: '39.12 dB', bitrate: '605 kbps' },
-        category: 'codec'
-      },
-      'deep_codec_waves': {
-        right: videoBase + 'deep_codec/standard_codec_waves.mp4',
-        left: videoBase + 'deep_codec/deep_codec_waves.mp4',
-        name: 'Waves - Deep Codec Comparison',
-        leftModel: 'Deep Codec',
-        rightModel: 'Standard Codec',
-        leftMetrics: { psnr: '34.8 dB', bitrate: '1364 kbps' },
-        rightMetrics: { psnr: '33.9 dB', bitrate: '2836 kbps' },
-        category: 'codec'
-      }
     };
 
     let currentVideoKey = null;
@@ -755,7 +682,7 @@
 
     // Auto-load the first video on page load
     window.addEventListener('load', () => {
-      loadVideoPair('koala_surfing');
+      loadVideoPair('snow_scene_veo3');
     });
 
     // Controls
